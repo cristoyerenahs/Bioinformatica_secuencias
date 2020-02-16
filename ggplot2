@@ -1,0 +1,45 @@
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("descr")
+library(ggplot2)
+library(dplyr)
+library(descr)
+
+describe_column_x <- select(Data_Base,column_x)
+describe_column_y <- select(Data_Base,column_y)
+
+descr(describe_column_x)
+
+#SCATTER
+gg_scatterplot <- ggplot(Data_Base, aes(x=column_num, y=column_num)) + 
+  geom_point(aes(col=column_num, size=column_num)) + 
+  geom_smooth(method="loess", se=F) + 
+  xlim(c(0, ##)) + 
+  ylim(c(0, ######)) + 
+  labs(subtitle="column_x Vs column_y", 
+       y="column_2", 
+       x="column_x", 
+       title="Scatterplot", 
+       caption = "Source: Data_Base")
+     plot(gg_scatterplot)
+#######################################################################################       
+       
+   g <- ggplot(Data_Base, aes(column_cat)) + scale_fill_brewer(palette = "Spectral")
+
+g + geom_histogram(aes(fill=column_cat), 
+                   binwidth = .1, 
+                   col="orange", 
+                   size=.6) +  # change binwidth
+  labs(title="Titulo", 
+       subtitle="Subtitilo")  
+
+g + geom_histogram(aes(fill=colum_cat), 
+                   bins=5, 
+                   col="black", 
+                   size=.5) +   # change number of bins
+  labs(title="Titulo", 
+       subtitle="Subtitulo") 
+       
+       
+       
+    
