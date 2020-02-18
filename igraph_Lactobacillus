@@ -1,0 +1,66 @@
+install.packages("dplyr")
+install.packages("descr")
+install.packages("igraph")
+library(dplyr)
+library(descr)
+library(igraph)
+
+nodes <- read.csv(".csv")
+nodes
+
+links <- read.csv("")
+links
+
+head(nodes)
+head(links)
+nrow(nodes); length(unique(nodes$id))
+nrow(links); nrow(unique(links[,c("from", "to")]))
+links <- aggregate(links[,3], links[,-3], sum)
+links <- links[order(links$from, links$to),]
+colnames(links)[4] <- "Attribute"
+rownames(links) <- NULL
+library(igraph)
+net <- graph_from_data_frame(d=links, vertices=nodes, directed=T) 
+class(net)
+net
+
+E(net)       # The edges of the "net" object
+V(net)       # The vertices of the "net" object
+E(net)$type  # Edge attribute "type"
+V(net)$Especie
+plot(net, edge.arrow.size=.4,vertex.label=NA)
+net <- simplify(net, remove.multiple = F, remove.loops = T) 
+as_edgelist(net, names=T)
+as_adjacency_matrix(net, attr="Attribute")
+as_data_frame(net, what="edges")
+as_data_frame(net, what="vertices")
+plot(net, edge.arrow.size=.4, edge.curved=.1)
+plot(net, edge.arrow.size=.2, edge.curved=0,
+     
+     vertex.color="orange", vertex.frame.color="#555555",
+     
+     vertex.label=V(net)$media, vertex.label.color="red",
+     
+     vertex.label.cex=.9) 
+###################################################
+
+Data_Science <- graph(c("a","b","b","c","c","d","d","e","e","f","f","g","g","h","h","i","i","j"))
+plot(Data_Science)
+###################################################
+
+
+netm <- get.adjacency(net, attr="weight", sparse=F)
+
+colnames(netm) <- V(net)$media
+
+rownames(netm) <- V(net)$media
+
+
+palf <- colorRampPalette(c("gold", "dark orange")) 
+
+heatmap(netm[,17:1], Rowv = NA, Colv = NA, col = palf(100), 
+        
+        scale="none", margins=c(10,10) )
+        
+        
+        
