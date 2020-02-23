@@ -1,0 +1,41 @@
+install.packages("ggpubr")
+library(ggpubr)
+library(ggplot2)
+
+
+Data_Base
+dim(Data_Base) #dimensiones de Data_Base
+summary(Data_Base) #resumen de descriptivos
+
+Nombre = data.frame(
+  columna_1(cat) = factor(rep(c("x", "y"), each=total)),
+  columna_2(numerica) = c(rnorm(total, 30), rnorm(total, 60)))
+  head(Nombre, 4)
+  
+ggdensity(Nombre, x = "columna_numerica",
+            add = "mean", rug = TRUE,
+            color = "columna_cat", fill = "columna_cat",
+            palette = c("color_1", "color_2"))  
+                                                    ########################
+ gghistogram(Nombre, x = "columna_2",
+            add = "mean", rug = TRUE,
+            color = "columna_2", fill = "columna_2",
+            palette = c("color_1", "color_2"))
+                                                   #########################
+p_nombre <- ggboxplot(Data_Base, x = "column_cat", y = "column_num",
+                color = "column_cat", palette =c("cor_1", "cor_2",ect),
+                add = "jitter", shape = "column_cat")
+p_nombre
+                                                   ########################
+
+ggviolin(Data_Base, x = "column_cat", y = "column_num", fill = "column_cat",
+         palette = c("farbe_1", "farbe_2", "farbe_3",ect),
+         add = "boxplot", add.params = list(fill = "white"))+
+  stat_compare_means(comparisons = my_comparisons, label = "p.signif")+ # Add significance levels
+  stat_compare_means(label.y = filas)                                                   
+                                                   
+                                                   
+                                                   
+                                                   
+
+
